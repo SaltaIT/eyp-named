@@ -1,0 +1,15 @@
+;
+; puppet generated file
+; 
+$TTL	3600
+@		IN SOA	<%= @zonename %>. root (
+					201503041		; serial
+					3600			; refresh
+					600			; retry
+					86400			; expiry
+					60)			; min TTL
+
+	       		IN NS		ns.<%= @zonename %>.
+
+ns.<%= @zonename %>. IN A 127.0.0.1
+

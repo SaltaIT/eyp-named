@@ -1,0 +1,51 @@
+//
+// named.conf
+//
+// puppet managed - do not edit
+//
+// Provided by Red Hat bind package to configure the ISC BIND named(8) DNS
+// server as a caching only nameserver (as a localhost DNS resolver only).
+//
+// See /usr/share/doc/bind*/sample/ for example named configuration files.
+//
+
+options {
+	listen-on port 53 { any; };
+	listen-on-v6 port 53 { none; };
+	directory 	"<%= scope.lookupvar('named::params::directory') %>";
+	dump-file 	"/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+<% if @resolver %>
+	allow-query     { any; };
+	allow-recursion-on { any; };
+	allow-query-cache { any; };
+	recursion yes;
+<% end %>
+
+<% if defined?(@alsonotify) -%>
+	also-notify {
+		<% @alsonotify.each do |val| -%><%= val %>;<% end %>
+	};
+<% end -%>
+
+	dnssec-enable <%= @dnssecenable %>;
+	dnssec-validation <%= @dnssecvalidation %>;
+	dnssec-lookaside auto;
+
+	/* Path to ISC DLV key */
+	bindkeys-file "/etc/named.iscdlv.key";
+
+<% if scope.lookupvar('named::params::managed_keys_dir') -%>
+	managed-keys-directory "<%= scope.lookupvar('named::params::managed_keys_dir') %>";
+<% end -%>
+
+<% if defined?(@upstreamresolver) %>
+	forwarders {
+<% @upstreamresolver.each do |val| -%>
+		<%= val %>;
+<% end -%>
+	};
+<% end %>
+
+};

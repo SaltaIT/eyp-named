@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cat <<EOF
+
+key "<%= @keyname %>" {
+  algorithm hmac-md5;
+  secret "$(grep ^Key <%= scope.lookupvar('named::keysdir') %>/K<%= @keyname %>.*.private | awk '{ print $NF }')";
+};
+
+EOF
+

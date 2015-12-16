@@ -1,0 +1,10 @@
+
+zone "." IN {
+	type hint;
+	file "named.ca";
+};
+
+include "/etc/named.rfc1912.zones";
+include "/etc/named.root.key";
+include "/etc/named/puppet-managed.keys";
+include "/etc/named/puppet-managed.zones";

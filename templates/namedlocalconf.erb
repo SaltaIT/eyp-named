@@ -1,0 +1,17 @@
+<% if defined?(@controls) -%>
+controls {
+<% @controls.each do |val| -%>
+	inet <%= val %> allow { <%= val %>; };
+<% end -%>
+};
+<% end -%>
+
+logging {
+        channel default_debug {
+                file "data/named.run";
+                severity dynamic;
+        };
+};
+
+include "<%= scope.lookupvar('named::params::confdir') %>/puppet-managed.keys";
+include "<%= scope.lookupvar('named::params::confdir') %>/puppet-managed.zones";

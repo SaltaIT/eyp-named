@@ -1,0 +1,30 @@
+
+zone "<%= @zonename %>" {
+	file "<%= scope.lookupvar('named::params::zonedir')%>/<%= @zonename %>";
+<% if defined?(@zonemaster) -%>
+	masters { <%= @zonemaster %>; };
+	type slave;
+<% else -%>
+	type master;
+<% if @notifyslaves -%>
+	notify yes;
+<% else -%>
+	notify no;
+<% end -%>
+<% end -%>
+<% if defined?(@allowtransfer) -%>
+	allow-transfer {
+		<% @allowtransfer.each do |val| -%><%= val %>;<% end %>
+	};
+<% end -%>
+<% if defined?(@allowupdate) -%>
+	allow-update {
+		<% @allowupdate.each do |val| -%><%= val %>;<% end %>
+	};
+<% end -%>
+<% if defined?(@alsonotify) -%>
+	also-notify {
+		<% @alsonotify.each do |val| -%><%= val %>;<% end %>
+	};
+<% end -%>
+};
