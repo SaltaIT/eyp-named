@@ -55,6 +55,7 @@ class named (
 			mode    => '0644',
 			content => template("${module_name}/sysconfig/${named::params::sysconfig_template}"),
 			require => Package[$named::params::packages],
+			notify  => Service[$named::params::servicename],
 			before  => Service[$named::params::servicename],
 		}
 	}
