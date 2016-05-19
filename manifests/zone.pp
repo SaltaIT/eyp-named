@@ -83,9 +83,9 @@ define named::zone ($zonename=$name, $zonemaster=undef, $zonefile=undef,
 
   if ($ensure == 'present')
   {
-    concat::fragment{ "zone_$zonename":
+    concat::fragment{ "zone_${zonename}":
       target  => "${named::params::confdir}/puppet-managed.zones",
-      content => template("named/zone.erb")
+      content => template("${module_name}/zone.erb")
     }
   }
 
@@ -93,26 +93,26 @@ define named::zone ($zonename=$name, $zonemaster=undef, $zonefile=undef,
   {
     if ($zonefile)
     {
-      file { "${named::params::zonedir}/$zonename":
-        ensure => $ensure,
-        owner => "root",
-        group => $named::params::osuser,
-        mode => 0640,
+      file { "${named::params::zonedir}/${zonename}":
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => $named::params::osuser,
+        mode    => '0640',
         replace => $replace,
-        notify => Service[$named::params::servicename],
-        source => $zonefile
+        notify  => Service[$named::params::servicename],
+        source  => $zonefile
       }
     }
     else
     {
-      file { "${named::params::zonedir}/$zonename":
-        ensure => $ensure,
-        owner => "root",
-        group => $named::params::osuser,
-        mode => 0640,
+      file { "${named::params::zonedir}/${zonename}":
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => $named::params::osuser,
+        mode    => '0640',
         replace => false,
-        notify => Service[$named::params::servicename],
-        content => template("named/zonetemplate.erb")
+        notify  => Service[$named::params::servicename],
+        content => template("${module_name}/zonetemplate.erb")
       }
     }
   }
