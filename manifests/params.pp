@@ -25,7 +25,7 @@ class named::params {
           $sysconfig_file=undef
           $sysconfig_template=undef
         }
-        default: { fail("Unsupported RHEL/CentOS version! - $::operatingsystemrelease")  }
+        default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
       }
 
     }
@@ -54,13 +54,13 @@ class named::params {
               $sysconfig_file='/etc/default/bind9'
               $sysconfig_template='debian.erb'
             }
-            default: { fail("Unsupported Ubuntu version! - $::operatingsystemrelease")  }
+            default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
-        'Debian': { fail("Unsupported")  }
-        default: { fail("Unsupported Debian flavour!")  }
+        'Debian': { fail('Unsupported')  }
+        default: { fail('Unsupported Debian flavour!')  }
       }
     }
-    default: { fail("Unsupported OS!")  }
+    default: { fail('Unsupported OS!')  }
   }
 }
