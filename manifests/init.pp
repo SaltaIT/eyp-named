@@ -8,7 +8,7 @@ class named (
               $controls         = undef, #TODO: rewrite
               $ensure           = 'installed',
               $ipv6             = false,
-            ) inherits params {
+            ) inherits named::params {
 
   if defined(Class['ntteam'])
   {

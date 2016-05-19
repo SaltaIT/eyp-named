@@ -49,7 +49,7 @@ define named::key ($keyname=$name) {
   #dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST -K /etc/named/keys/ test > /etc/named/keys/keygen.log 2>&1
 
   exec { "dynupdateskeygen_${keyname}":
-     command => "/usr/sbin/dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST -K ${named::keysdir}/ ${keyname} > ${named::keysdir}/keygen.${keyname}.log 2>&1",
+    command => "/usr/sbin/dnssec-keygen -r /dev/urandom -a HMAC-MD5 -b 512 -n HOST -K ${named::keysdir}/ ${keyname} > ${named::keysdir}/keygen.${keyname}.log 2>&1",
     creates => "${named::keysdir}/keygen.${keyname}.log",
     require => File["${named::keysdir}/.helpers/initkeyconf.${keyname}"]
   }
