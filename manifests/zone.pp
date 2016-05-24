@@ -57,12 +57,24 @@
 #
 # Copyright 2015 Jordi Prats, unless otherwise noted.
 #
-define named::zone ($zonename=$name, $zonemaster=undef, $zonefile=undef,
-      $allowtransfer=[ 'none' ], $replace=true,
-      $notifyslaves=true,
-      $allowupdate=undef,
-      $alsonotify=undef,
-      $ensure='present') {
+define named::zone(
+                    $zonename      = $name,
+                    $zonemaster    = undef,
+                    $zonefile      = undef,
+                    $allowtransfer = [ 'none' ],
+                    $replace       = true,
+                    $notifyslaves  = true,
+                    $allowupdate   = undef,
+                    $alsonotify    = undef,
+                    $ensure        = 'present',
+                    $ns            = [ '127.0.0.1' ],
+                    $serial        = '1983120401',
+                    $refresh       = '3600',
+                    $retry         = '600',
+                    $expiry        = '86400',
+                    $minttl        = '60',
+                    $default_ttl   = '3600',
+                  ) {
 
   validate_string($zonename)
 
