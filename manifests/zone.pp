@@ -101,30 +101,31 @@ define named::zone(
     }
   }
 
+  concat { "${named::params::zonedir}/${zonename}":
+    ensure  => $ensure,
+    owner   => 'root',
+    group   => $named::params::osuser,
+    mode    => '0640',
+    replace => $replace,
+    notify  => Service[$named::params::servicename],
+  }
+
   if $zonemaster==undef
   {
     if ($zonefile)
     {
-      file { "${named::params::zonedir}/${zonename}":
-        ensure  => $ensure,
-        owner   => 'root',
-        group   => $named::params::osuser,
-        mode    => '0640',
-        replace => $replace,
-        notify  => Service[$named::params::servicename],
-        source  => $zonefile
+      concat::fragment{ "base zona ${named::params::zonedir}/${zonename}":
+        target => "${named::params::zonedir}/${zonename}",
+        source => $zonefile,
+        order  => '00',
       }
     }
     else
     {
-      file { "${named::params::zonedir}/${zonename}":
-        ensure  => $ensure,
-        owner   => 'root',
-        group   => $named::params::osuser,
-        mode    => '0640',
-        replace => false,
-        notify  => Service[$named::params::servicename],
-        content => template("${module_name}/zonetemplate.erb")
+      concat::fragment{ "base zona ${named::params::zonedir}/${zonename}":
+        target  => "${named::params::zonedir}/${zonename}",
+        content => template("${module_name}/zonetemplate.erb"),
+        order   => '00',
       }
     }
   }
