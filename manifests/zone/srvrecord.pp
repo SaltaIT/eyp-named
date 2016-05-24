@@ -14,7 +14,7 @@ define named::zone::srvrecord (
                                 $service,
                                 $port,
                                 $zonename,
-                                $domain   = $zonename,
+                                $domain   = undef,
                                 $protocol = 'tcp',
                                 $target   = $name,
                                 $ttl      = undef,
