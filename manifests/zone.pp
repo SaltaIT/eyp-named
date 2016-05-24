@@ -1,3 +1,7 @@
+#
+# zone concat
+# 00 - SOA
+# 99 -  srv records
 define named::zone(
                     $zonename      = $name,
                     $zonemaster    = undef,
