@@ -53,73 +53,73 @@ class { 'named':
 To setup a zone using a specific file:
 
 ```puppet
-	class { 'named':
-		resolver => false,
-	}
+class { 'named':
+	resolver => false,
+}
 
-	named::zone { 'ccc.local':
-		zonename => "ccc.local",
-		zonefile => "puppet:///masterdns/ccc.local",
-	}
+named::zone { 'ccc.local':
+	zonename => "ccc.local",
+	zonefile => "puppet:///masterdns/ccc.local",
+}
 ```
 
 To setup a zone using it's default template
 
 ```puppet
-	class { 'named':
-		resolver => false,
-	}
+class { 'named':
+	resolver => false,
+}
 
-	named::zone { 'ccc.local':
-		zonename => "ccc.local",
-	}
+named::zone { 'ccc.local':
+	zonename => "ccc.local",
+}
 ```
 
 To setup a zone as slave:
 
 ```puppet
-	class { 'named':
-		resolver => false,
-	}
+class { 'named':
+	resolver => false,
+}
 
-	named::zone { 'ccc.local':
-		zonename => "ccc.local",
-		zonemaster => "1.2.3.4",
-	}
+named::zone { 'ccc.local':
+	zonename => "ccc.local",
+	zonemaster => "1.2.3.4",
+}
 ```
 
 Add a server to be notified on every zone change
 
 ```puppet
-	class { 'named':
-		alsonotify => [ '192.168.56.15' ],
-	}
+class { 'named':
+	alsonotify => [ '192.168.56.15' ],
+}
 ```
 
 Add an additional server to notify for a specific zone:
 
 ```puppet
-  named::zone { 'example.local':
-    zonefile => 'puppet:///dnsmaster/example.local',
-    notifyslaves => true,
-    alsonotify => [ '192.168.56.15' ],
-  }
+named::zone { 'example.local':
+  zonefile => 'puppet:///dnsmaster/example.local',
+  notifyslaves => true,
+  alsonotify => [ '192.168.56.15' ],
+}
 ```
 
 Add a key to allow dynamic updates to a zone:
 
 ```puppet
- named::key { 'kk':
- }
+named::key { 'kk':
+}
 
- named::zone { 'example.local':
-   zonename => "example.local",
-   zonefile => 'puppet:///dnsmaster/example.local',
-   notifyslaves => true,
-   replace => false,
-   allowtransfer => [ 'any' ],
-   allowupdate => [ 'key "kk"' ],
- }
+named::zone { 'example.local':
+ zonename => "example.local",
+ zonefile => 'puppet:///dnsmaster/example.local',
+ notifyslaves => true,
+ replace => false,
+ allowtransfer => [ 'any' ],
+ allowupdate => [ 'key "kk"' ],
+}
 ```
 
 
