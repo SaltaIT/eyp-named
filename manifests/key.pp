@@ -1,39 +1,3 @@
-# == Define: named::key
-#
-# named::key
-#
-# === Parameters
-#
-#
-# [*keyname*]
-#   Specify keyname, default's to resource's name
-#
-#
-# === Examples
-#
-# #add a key to allow dynamic updates to a zone
-#  named::key { 'kk':
-#  }
-#
-#  named::zone { 'example.local':
-#    zonename => "example.local",
-#    zonefile => 'puppet:///dnsmaster/example.local',
-#    notifyslaves => true,
-#    replace => false,
-#    allowtransfer => [ 'any' ],
-#    allowupdate => [ 'key "kk"' ],
-#  }
-#
-#
-#
-# === Authors
-#
-# Jordi Prats <jordi.prats@gmail.com>
-#
-# === Copyright
-#
-# Copyright 2015 Jordi Prats, unless otherwise noted.
-#
 define named::key ($keyname=$name) {
 
   validate_string($keyname)

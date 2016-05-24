@@ -96,6 +96,33 @@ Add a server to be notified on every zone change
 	}
 ```
 
+Add an additional server to notify for a specific zone:
+
+```puppet
+  named::zone { 'example.local':
+    zonefile => 'puppet:///dnsmaster/example.local',
+    notifyslaves => true,
+    alsonotify => [ '192.168.56.15' ],
+  }
+```
+
+Add a key to allow dynamic updates to a zone:
+
+```puppet
+ named::key { 'kk':
+ }
+
+ named::zone { 'example.local':
+   zonename => "example.local",
+   zonefile => 'puppet:///dnsmaster/example.local',
+   notifyslaves => true,
+   replace => false,
+   allowtransfer => [ 'any' ],
+   allowupdate => [ 'key "kk"' ],
+ }
+```
+
+
 ## Usage
 
 Put the classes, types, and resources for customizing, configuring, and doing
