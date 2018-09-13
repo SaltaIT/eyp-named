@@ -1,5 +1,5 @@
 class { 'named': }
 
 named::zone { 'systemadmin.es':
-  ns => [ 'qapla.systemsadmins.es']
+  forwarders => [ '8.8.8.8']
 }
