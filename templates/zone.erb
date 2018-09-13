@@ -1,6 +1,5 @@
 
 zone "<%= @zonename %>" {
-	file "<%= scope.lookupvar('named::params::zonedir')%>/<%= @zonename %>";
 <% if @forwarders.any? -%>
 	type forward;
 	forward only;
@@ -8,6 +7,7 @@ zone "<%= @zonename %>" {
 		<% @forwarders.each do |val| -%><%= val %>;<% end %>
 	};
 <% else -%>
+	file "<%= scope.lookupvar('named::params::zonedir')%>/<%= @zonename %>";
 	<%- if defined?(@zonemaster) -%>
 	masters { <%= @zonemaster %>; };
 	type slave;
