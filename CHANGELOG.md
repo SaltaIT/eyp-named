@@ -2,7 +2,8 @@
 
 ## 0.3.0
 
-* rewritten zone management
+* MAJOR CHANGES:
+  - rewritten zone management
 
 ## 0.2.9
 
