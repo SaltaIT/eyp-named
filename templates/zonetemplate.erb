@@ -8,3 +8,7 @@ $TTL	<%= @default_ttl %>
 					<%= @retry %>			; retry
 					<%= @expiry %>			; expiry
 					<%= @minttl %>)			; min TTL
+
+<% @ns.each |val| do -%>
+					IN NS <%= val %>
+<% end -%>
