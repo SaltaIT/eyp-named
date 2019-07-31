@@ -4,6 +4,7 @@
 
 * MAJOR CHANGES:
   - rewritten zone management
+  - added record management
 
 ## 0.2.9
 
