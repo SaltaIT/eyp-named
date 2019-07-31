@@ -9,6 +9,6 @@ $TTL	<%= @default_ttl %>
 					<%= @expiry %>			; expiry
 					<%= @minttl %>)			; min TTL
 
-<% @ns.each |val| do -%>
+<% @ns.each do |val| -%>
 					IN NS <%= val %>
 <% end -%>
