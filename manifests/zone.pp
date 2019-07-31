@@ -4,8 +4,7 @@
 # 99 -  srv records
 define named::zone(
                     $zonename      = $name,
-                    $zonemaster    = undef,
-                    $zonefile      = undef,
+                    $soa           = $name,
                     $allowtransfer = [ 'none' ],
                     $replace       = true,
                     $notifyslaves  = true,
@@ -23,11 +22,6 @@ define named::zone(
                   ) {
 
   validate_string($zonename)
-
-  if ($zonemaster)
-  {
-    validate_string($zonemaster)
-  }
 
   if ($allowupdate)
   {
@@ -56,24 +50,10 @@ define named::zone(
     notify  => Service[$named::params::servicename],
   }
 
-  if $zonemaster==undef
-  {
-    if ($zonefile)
-    {
-      concat::fragment{ "base zona ${named::params::zonedir}/${zonename}":
-        target => "${named::params::zonedir}/${zonename}",
-        source => $zonefile,
-        order  => '00',
-      }
-    }
-    else
-    {
-      concat::fragment{ "base zona ${named::params::zonedir}/${zonename}":
-        target  => "${named::params::zonedir}/${zonename}",
-        content => template("${module_name}/zonetemplate.erb"),
-        order   => '00',
-      }
-    }
+  concat::fragment{ "base zona ${named::params::zonedir}/${zonename}":
+    target  => "${named::params::zonedir}/${zonename}",
+    content => template("${module_name}/zonetemplate.erb"),
+    order   => '00',
   }
 
 
