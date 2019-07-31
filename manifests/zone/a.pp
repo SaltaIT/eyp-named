@@ -1,7 +1,7 @@
 define named::zone::a (
                                 $value,
-                                $record   = $name,
                                 $zonename,
+                                $record   = $name,
                                 $ttl      = undef,
                                 $class    = 'IN',
                               ) {
