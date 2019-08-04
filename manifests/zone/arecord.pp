@@ -1,4 +1,4 @@
-define named::zone::cname (
+define named::zone::arecord (
                                 $value,
                                 $zonename,
                                 $record   = $name,
@@ -6,9 +6,9 @@ define named::zone::cname (
                                 $class    = 'IN',
                               ) {
 
-  concat::fragment{ "CNAME ${record}/${value} record ${named::params::zonedir}/${zonename}":
+  concat::fragment{ "A ${record}/${value} record ${named::params::zonedir}/${zonename}":
     target  => "${named::params::zonedir}/${zonename}",
-    content => template("${module_name}/zone/cnamerecord.erb"),
+    content => template("${module_name}/zone/arecord.erb"),
     order   => '99',
   }
 }
