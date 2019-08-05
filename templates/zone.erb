@@ -21,7 +21,11 @@ zone "<%= @zonename %>" {
 	<%- end -%>
 	<%- if defined?(@allowtransfer) -%>
 	allow-transfer {
+		<%- if @allowtransfer.any? -%>
 		<% @allowtransfer.each do |val| -%><%= val %>;<% end %>
+		<%- else -%>
+		"none";
+		<%- end -%>
 	};
 	<%- end -%>
 	<%- if defined?(@allowupdate) -%>
