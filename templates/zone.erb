@@ -19,7 +19,6 @@ zone "<%= @zonename %>" {
 	notify no;
 		<%- end -%>
 	<%- end -%>
-	<%- if defined?(@allowtransfer) -%>
 	allow-transfer {
 		<%- if @allowtransfer.any? -%>
 		<% @allowtransfer.each do |val| -%><%= val %>;<% end %>
@@ -27,13 +26,12 @@ zone "<%= @zonename %>" {
 		"none";
 		<%- end -%>
 	};
-	<%- end -%>
-	<%- if defined?(@allowupdate) -%>
+	<%- if @allowupdate.any? -%>
 	allow-update {
 		<% @allowupdate.each do |val| -%><%= val %>;<% end %>
 	};
 	<%- end -%>
-	<%- if defined?(@alsonotify) -%>
+	<%- if @alsonotify.any? -%>
 	also-notify {
 		<% @alsonotify.each do |val| -%><%= val %>;<% end %>
 	};
