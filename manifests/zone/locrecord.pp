@@ -4,11 +4,13 @@ define named::zone::locrecord (
                                 $record   = $name,
                                 $ttl      = undef,
                                 $class    = 'IN',
+                                $order    = '00',
+                                $description = undef,
                               ) {
 
   concat::fragment{ "LOC ${record}/${value} record ${named::params::zonedir}/${zonename}":
     target  => "${named::params::zonedir}/${zonename}",
     content => template("${module_name}/zone/locrecord.erb"),
-    order   => '99',
+    order   => "99-${order}",
   }
 }
