@@ -12,3 +12,7 @@ $TTL	<%= @default_ttl %>
 <% @ns.each do |val| -%>
 					IN NS <%= val %>
 <% end -%>
+
+<% @mx.each do |key, val| -%>
+					IN MX <%= key %> <%= val %>
+<% end -%>

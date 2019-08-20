@@ -6,6 +6,7 @@ define named::zone(
                     $zonename      = $name,
                     $soa           = $name,
                     $ns            = [ "ns.${name}." ],
+                    $mx            = { "mx.${name}." => '5' },
                     $allowtransfer = [],
                     $replace       = true,
                     $notifyslaves  = true,
