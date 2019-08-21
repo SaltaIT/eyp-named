@@ -21,7 +21,7 @@ define named::zone::srvrecord (
                                 $priority    = '0',
                                 $weight      = '5',
                                 $class       = 'IN',
-                                $order       = '00',
+                                $order       = '42',
                                 $description = undef,
                               ) {
 
