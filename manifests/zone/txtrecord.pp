@@ -6,6 +6,7 @@ define named::zone::txtrecord (
                                 $class    = 'IN',
                                 $order    = '00',
                                 $description = undef,
+                                $append_zonename = true,
                               ) {
 
   concat::fragment{ "TXT ${record}/${value} record ${named::params::zonedir}/${zonename}":

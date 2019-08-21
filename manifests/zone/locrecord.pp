@@ -6,6 +6,7 @@ define named::zone::locrecord (
                                 $class    = 'IN',
                                 $order    = '00',
                                 $description = undef,
+                                $append_zonename = true,
                               ) {
 
   concat::fragment{ "LOC ${record}/${value} record ${named::params::zonedir}/${zonename}":

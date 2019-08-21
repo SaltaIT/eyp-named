@@ -6,6 +6,7 @@ define named::zone::arecord (
                                 $class    = 'IN',
                                 $order    = '00',
                                 $description = undef,
+                                $append_zonename = true,
                               ) {
 
   concat::fragment{ "A ${record}/${value} record ${named::params::zonedir}/${zonename}":
