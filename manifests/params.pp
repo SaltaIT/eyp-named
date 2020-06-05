@@ -8,7 +8,7 @@ class named::params {
       $utils_packages = [ 'bind-utils' ]
       case $::operatingsystemrelease
       {
-        /^[67].*$/:
+        /^[678].*$/:
         {
           $confdir='/etc/named'
           $servicename='named'
@@ -33,32 +33,45 @@ class named::params {
     {
       $packages= [ 'bind9' ]
       $utils_packages = [ 'bind9utils', 'dnsutils' ]
+
+      $confdir='/etc/bind'
+      $servicename='bind9'
+      $directory='/var/cache/bind'
+
+      $zonedir='/etc/bind'
+
+      $options_file='/etc/bind/named.conf.options'
+      $localconfig_file='/etc/bind/named.conf.local'
+
+      $osuser='bind'
+
+      $sysconfig_file='/etc/default/bind9'
+      $sysconfig_template='debian.erb'
       case $::operatingsystem
       {
         'Ubuntu':
         {
           case $::operatingsystemrelease
           {
-            /^14.*$/:
+            /^1[468].*$/:
             {
-              $confdir='/etc/bind'
-              $servicename='bind9'
-              $directory='/var/cache/bind'
-
-              $zonedir='/etc/bind'
-
-              $options_file='/etc/bind/named.conf.options'
-              $localconfig_file='/etc/bind/named.conf.local'
-
-              $osuser='bind'
-
-              $sysconfig_file='/etc/default/bind9'
-              $sysconfig_template='debian.erb'
+            }
+            /^20.*$/:
+            {
             }
             default: { fail("Unsupported Ubuntu version! - ${::operatingsystemrelease}")  }
           }
         }
-        'Debian': { fail('Unsupported')  }
+        'Debian':
+        {
+          case $::operatingsystemrelease
+          {
+            /^10.*$/:
+            {
+            }
+            default: { fail("Unsupported Debian version! - ${::operatingsystemrelease}")  }
+          }
+        }
         default: { fail('Unsupported Debian flavour!')  }
       }
     }

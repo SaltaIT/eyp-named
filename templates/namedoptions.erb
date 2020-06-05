@@ -6,27 +6,36 @@
 
 options {
 	listen-on port 53 { any; };
-<% if @ipv6 %>
+	<%- if @ipv6 -%>
 	listen-on-v6 port 53 { any; };
-<% else %>
+	<%- else -%>
 	listen-on-v6 port 53 { none; };
-<% end %>
+	<%- end -%>
+
 	directory 	"<%= scope.lookupvar('named::params::directory') %>";
 	dump-file 	"/var/named/data/cache_dump.db";
         statistics-file "/var/named/data/named_stats.txt";
         memstatistics-file "/var/named/data/named_mem_stats.txt";
-<% if @resolver %>
+
+	<%- if @resolver -%>
 	allow-query     { any; };
 	allow-recursion-on { any; };
 	allow-query-cache { any; };
 	recursion yes;
-<% end %>
+	<%- end -%>
 
-<% if defined?(@alsonotify) -%>
+	<%- if defined?(@alsonotify) -%>
 	also-notify {
 		<% @alsonotify.each do |val| -%><%= val %>;<% end %>
 	};
-<% end -%>
+	<%- end -%>
+
+	<%- if defined?(@rate_limit_per_second) -%>
+	rate-limit {
+			 responses-per-second <%= @rate_limit_per_second %>;
+			 log-only <%= scope.function_bool2yesno([@rate_limit_per_second_log_only]) %>;
+	};
+	<%- end -%>
 
 	dnssec-enable <%= @dnssecenable %>;
 	dnssec-validation <%= @dnssecvalidation %>;
@@ -35,16 +44,15 @@ options {
 	/* Path to ISC DLV key */
 	bindkeys-file "/etc/named.iscdlv.key";
 
-<% if scope.lookupvar('named::params::managed_keys_dir') -%>
+	<%- if scope.lookupvar('named::params::managed_keys_dir') -%>
 	managed-keys-directory "<%= scope.lookupvar('named::params::managed_keys_dir') %>";
-<% end -%>
+	<%- end -%>
 
 <% if defined?(@upstreamresolver) %>
 	forwarders {
-<% @upstreamresolver.each do |val| -%>
+	<%- @upstreamresolver.each do |val| -%>
 		<%= val %>;
-<% end -%>
+	<%- end -%>
 	};
-<% end %>
-
+<% end -%>
 };

@@ -1,14 +1,16 @@
 class named (
-              $upstreamresolver = undef,
-              $resolver         = true,
-              $keysdir          = "${named::params::confdir}/keys",
-              $alsonotify       = undef,
-              $dnssecenable     = 'no',
-              $dnssecvalidation = 'no',
-              $controls         = undef, #TODO: rewrite
-              $ensure           = 'installed',
-              $ipv6             = false,
-              $manage_utils     = true,
+              $upstreamresolver               = undef,
+              $resolver                       = true,
+              $keysdir                        = "${named::params::confdir}/keys",
+              $alsonotify                     = undef,
+              $dnssecenable                   = 'no',
+              $dnssecvalidation               = 'no',
+              $controls                       = undef, #TODO: rewrite
+              $ensure                         = 'installed',
+              $ipv6                           = false,
+              $manage_utils                   = true,
+              $rate_limit_per_second          = undef,
+              $rate_limit_per_second_log_only = false,
             ) inherits named::params {
 
   if ($upstreamresolver) {

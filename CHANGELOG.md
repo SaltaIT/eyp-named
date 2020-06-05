@@ -1,5 +1,10 @@
 # CHANGELOG
 
+# 0.3.3
+
+* improved OS compatibility
+* added support for rate limitations
+
 # 0.3.2
 
 * improved zone notify support

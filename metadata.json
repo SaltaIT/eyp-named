@@ -1,6 +1,6 @@
 {
   "name": "eyp-named",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "eyp",
   "summary": "named management",
   "license": "Apache-2.0",
@@ -15,11 +15,19 @@
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
-      "operatingsystemrelease": [ "6", "7" ]
+      "operatingsystemrelease": [ "6", "7", "8" ]
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [ "14.04" ]
+      "operatingsystemrelease": [ "14.04", "16.04", "18.04", "20.04" ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [ "10" ]
+    },
+    {
+      "operatingsystem": "Raspbian",
+      "operatingsystemrelease": [ "10" ]
     }
   ],
   "requirements": [
